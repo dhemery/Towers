@@ -22,4 +22,13 @@ public class OnLaunch {
 		theCity().is(8).blocksWide();
 		theCity().is(8).blocksLong();
 	}
+	
+	@Test
+	public void hasAOneFloorTowerOnEachBlock() {
+		for(int row = 0 ; row < 8 ; row++) {
+			for(int column = 0 ; column < 8 ; column++) {
+				tower(row,column).has(1).floor();
+			}
+		}
+	}
 }

@@ -11,6 +11,10 @@ public class TowersFixture {
 		return new CityFixture(frameFixture);
 	}
 
+	public static TowerFixture tower(int row, int column) {
+		return new TowerFixture(frameFixture, row, column);
+	}
+
 	public static void launch() {
 		Towers.main();
 		frameFixture = new FrameFixture(Towers.APPLICATION_FRAME_NAME);
