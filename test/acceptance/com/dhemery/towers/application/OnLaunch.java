@@ -18,8 +18,8 @@ public class OnLaunch {
 	}
 
 	@Test
-	public void theCityIsEightBlocksWide() {
-		city().has(8).columns();
+	public void theCityIsEightBlocksSquare() {
+		theCity().is(8).blocksWide();
+		theCity().is(8).blocksLong();
 	}
-
 }

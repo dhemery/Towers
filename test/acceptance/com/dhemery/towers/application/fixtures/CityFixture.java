@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.fixture.JPanelFixture;
-
 public class CityFixture {
 	private JPanelFixture fixture;
 
@@ -12,16 +11,20 @@ public class CityFixture {
 		this.fixture = frameFixture.panel();
 	}
 	
-	public CityAssertion has(int expectedNumber) {
-		return new CityAssertion(this, expectedNumber);
+	private GridLayout layout() {
+		return (GridLayout) fixture.target.getLayout();
 	}
 
-	public int columns() {
+	public int length() {
+		return layout().getRows();
+	}
+
+	public int width() {
 		return layout().getColumns();
 	}
 
-	private GridLayout layout() {
-		return (GridLayout) fixture.target.getLayout();
+	public CityAssertion is(int expected) {
+		return new CityAssertion(this, expected);
 	}
 
 }

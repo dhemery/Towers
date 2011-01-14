@@ -7,7 +7,7 @@ import com.dhemery.towers.application.Towers;
 public class TowersFixture {
 	private static FrameFixture frameFixture;
 
-	public static CityFixture city() {
+	public static CityFixture theCity() {
 		return new CityFixture(frameFixture);
 	}
 
