@@ -1,0 +1,53 @@
+DELIVERED TO THE TDD CLASS
+--------------------------
+
+Board
+
+Starting position
+
+Players alternate turns
+
+A player can move a tower from one block to another.
+
+A capturing tower combines with the captured tower.
+
+
+
+
+TO BE DEVELOPED IN CLASS
+------------------------
+
+The game allows only legal moves:
+    - Only a free tower may move.
+    - A tower moves as many blocks as it has floors.
+    - A tower must land on another tower.
+
+End: The game ends when a player cannot move.
+
+Win: The winner is the player who owns the most floors.
+    - When you own the top floor, you own the tower and all of the floors in it.
+
+Preferences
+
+
+
+EXTRA CREDIT
+------------
+
+Optional rule: Isolated towers (towers with no path to the tallest tower) are removed from the game.
+
+Option: Display legal moves.
+
+Option: Board size.
+
+Option: Utility: Isolation means becoming separate from a utility.
+
+Option: You capture floors that you isolate.
+
+Option: Two phases: Place the towers, build up.
+
+
+
+DONE
+----
+
