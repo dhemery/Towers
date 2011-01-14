@@ -10,7 +10,7 @@ public class CityAssertion {
 		this.city = city;
 		this.expectedNumber = expectedNumber;
 	}
-	public void rows() {
-		assertThat(city.rows()).isEqualTo(expectedNumber);
+	public void columns() {
+		assertThat(city.columns()).isEqualTo(expectedNumber);
 	}
 }

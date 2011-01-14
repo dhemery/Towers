@@ -16,8 +16,8 @@ public class CityFixture {
 		return new CityAssertion(this, expectedNumber);
 	}
 
-	public int rows() {
-		return layout().getRows();
+	public int columns() {
+		return layout().getColumns();
 	}
 
 	private GridLayout layout() {
