@@ -19,16 +19,36 @@ public class OnLaunch {
 
 	@Test
 	public void theCityIsEightBlocksSquare() {
-		theCity().is(8).blocksWide();
-		theCity().is(8).blocksLong();
+		theCity().hasWidth(8);
+		theCity().hasLength(8);
 	}
 	
 	@Test
-	public void hasAOneFloorTowerOnEachBlock() {
+	public void eachCityBlockasAOneFloorTower() {
 		for(int row = 0 ; row < 8 ; row++) {
 			for(int column = 0 ; column < 8 ; column++) {
-				tower(row,column).has(1).floor();
+				tower(row,column).hasfloorCount(1);
 			}
+		}
+	}
+	
+	@Test
+	public void towersAlternateColors() {
+		towersAlternateColorsDownFirstColumn();
+		towersAlternateColorsAlongEachRow();
+	}
+
+	private void towersAlternateColorsAlongEachRow() {
+		for(int row = 0 ; row < 8 ; row++) {
+			for(int column = 1 ; column < 8 ; column++) {
+				tower(row,column).hasDifferentColorThan(tower(row,column-1));
+			}
+		}
+	}
+
+	private void towersAlternateColorsDownFirstColumn() {
+		for(int row = 1 ; row < 8 ; row++) {
+			tower(row,0).hasDifferentColorThan(tower(row-1,0));
 		}
 	}
 }

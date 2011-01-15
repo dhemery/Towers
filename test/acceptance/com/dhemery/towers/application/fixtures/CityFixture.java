@@ -2,6 +2,8 @@ package com.dhemery.towers.application.fixtures;
 
 import java.awt.GridLayout;
 
+import static org.fest.assertions.Assertions.*;
+
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.fixture.JPanelFixture;
 public class CityFixture {
@@ -11,20 +13,24 @@ public class CityFixture {
 		this.fixture = frameFixture.panel();
 	}
 	
+	public void hasLength(int expectedLength) {
+		assertThat(length()).isEqualTo(expectedLength);
+	}
+
+	public void hasWidth(int expectedWidth) {
+		assertThat(width()).isEqualTo(expectedWidth);
+	}
+
 	private GridLayout layout() {
 		return (GridLayout) fixture.target.getLayout();
 	}
 
-	public int length() {
-		return layout().getRows();
-	}
-
-	public int width() {
+	private int length() {
 		return layout().getColumns();
 	}
 
-	public CityAssertion is(int expected) {
-		return new CityAssertion(this, expected);
+	private int width() {
+		return layout().getRows();
 	}
 
 }
