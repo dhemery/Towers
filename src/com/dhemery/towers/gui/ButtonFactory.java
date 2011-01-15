@@ -1,4 +1,4 @@
-package com.dhemery.towers.application;
+package com.dhemery.towers.gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -9,23 +9,15 @@ import javax.swing.JButton;
 
 import com.dhemery.towers.model.Address;
 import com.dhemery.towers.model.Grid;
-import com.dhemery.towers.model.Tourist;
 
 public class ButtonFactory {
-	private final class ButtonGatherer implements Tourist {
-		private final List<JButton> buttons;
-		private ButtonGatherer(List<JButton> buttons) {
-			this.buttons = buttons;
-		}
-		@Override
-		public void visit(Address address) {
-			makeButton(buttons, address);
-		}
+	private final List<JButton> buttons;
+
+	public ButtonFactory(Grid grid) {
+		buttons = makeButtons(grid);		
 	}
 
-	public List<JButton> buttonsFor(Grid grid) {
-		List<JButton> buttons = new ArrayList<JButton>();
-		grid.atEachAddress(new ButtonGatherer(buttons));
+	public List<JButton> buttons() {
 		return buttons;
 	}
 
@@ -33,11 +25,7 @@ public class ButtonFactory {
 		return (i % 2) == 0;
 	}
 
-	private void makeButton(List<JButton> buttons, Address address) {
-		buttons.add(makeTowerButton(address));
-	}
-
-	private JButton makeTowerButton(Address address) {
+	private JButton makeButton(Address address) {
 		JButton button = new JButton();
 		button.setName(address.name());
 		button.setSize(60,60);
@@ -53,5 +41,13 @@ public class ButtonFactory {
 		button.setText("1");
 		button.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 		return button;
+	}
+
+	private List<JButton> makeButtons(Grid grid) {
+		List<JButton> buttons = new ArrayList<JButton>();
+		for(Address address : grid.addresses()) {
+			buttons.add(makeButton(address));
+		}
+		return buttons;
 	}
 }
