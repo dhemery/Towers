@@ -1,5 +1,6 @@
 package com.dhemery.towers.application;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -14,12 +15,14 @@ import com.dhemery.towers.model.Address;
 
 public class Towers {
 	public static final String APPLICATION_FRAME_NAME = "Application Frame";
+	public static final String CITY_PANEL_NAME = "City Panel";
 	protected static final int CITY_SIZE = 8;
 
 	private final JFrame frame;
 
 	public static void main(String...args) {
 		SwingUtilities.invokeLater(new Runnable() {
+
 			@Override
 			public void run() {
 				new Towers().run();
@@ -32,9 +35,10 @@ public class Towers {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setName(APPLICATION_FRAME_NAME);
 		JPanel panel = new JPanel();
+		panel.setName(CITY_PANEL_NAME);
 		panel.setLayout(new GridLayout(CITY_SIZE,CITY_SIZE));
 		panel.setPreferredSize(new Dimension(400,400));
-		frame.setContentPane(panel);
+		frame.add(panel, BorderLayout.CENTER);
 		for(int row = 0 ; row < CITY_SIZE ; row++) {
 			for(int column = 0 ; column < CITY_SIZE ; column++) {
 				JButton button = new JButton();

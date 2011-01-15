@@ -6,11 +6,13 @@ import static org.fest.assertions.Assertions.*;
 
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.fixture.JPanelFixture;
+
+import com.dhemery.towers.application.Towers;
 public class CityFixture {
 	private JPanelFixture fixture;
 
 	public CityFixture(FrameFixture frameFixture) {
-		this.fixture = frameFixture.panel();
+		this.fixture = frameFixture.panel(Towers.CITY_PANEL_NAME);
 	}
 	
 	public void hasLength(int expectedLength) {

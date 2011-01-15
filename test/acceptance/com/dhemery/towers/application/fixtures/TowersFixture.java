@@ -14,7 +14,6 @@ public class TowersFixture {
 
 	public static void stop() {
 		frameFixture.cleanUp();
-		frameFixture.close();
 	}
 
 	public static CityFixture theCity() {
