@@ -29,6 +29,10 @@ public class ButtonFactory {
 		return buttons;
 	}
 
+	private boolean isEven(int i) {
+		return (i % 2) == 0;
+	}
+
 	private void makeButton(List<JButton> buttons, Address address) {
 		buttons.add(makeTowerButton(address));
 	}
@@ -49,9 +53,5 @@ public class ButtonFactory {
 		button.setText("1");
 		button.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 		return button;
-	}
-
-	private boolean isEven(int i) {
-		return i %2 == 0;
 	}
 }

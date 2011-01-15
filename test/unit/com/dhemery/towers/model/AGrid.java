@@ -23,18 +23,18 @@ public class AGrid {
 	
 	@Test
 	public void visitsAddressesInRowAndColumnOrder() {
-		final Sequence rowAndColumnOrder = context.sequence("row-column-order");
+		final Sequence visitationOrder = context.sequence("visitation order");
 		final Tourist visitTheAddress = context.mock(Tourist.class);
 
 		context.checking(new Expectations() {{
-			oneOf(visitTheAddress).visit(new Address(0,0)); inSequence(rowAndColumnOrder);
-			oneOf(visitTheAddress).visit(new Address(0,1)); inSequence(rowAndColumnOrder);
-			oneOf(visitTheAddress).visit(new Address(1,0)); inSequence(rowAndColumnOrder);
-			oneOf(visitTheAddress).visit(new Address(1,1)); inSequence(rowAndColumnOrder);
-			oneOf(visitTheAddress).visit(new Address(2,0)); inSequence(rowAndColumnOrder);
-			oneOf(visitTheAddress).visit(new Address(2,1)); inSequence(rowAndColumnOrder);
-		}});
-
+			oneOf (visitTheAddress).visit(new Address(0,0)); inSequence(visitationOrder);
+			oneOf (visitTheAddress).visit(new Address(0,1)); inSequence(visitationOrder);
+			oneOf (visitTheAddress).visit(new Address(1,0)); inSequence(visitationOrder);
+			oneOf (visitTheAddress).visit(new Address(1,1)); inSequence(visitationOrder);
+			oneOf (visitTheAddress).visit(new Address(2,0)); inSequence(visitationOrder);
+			oneOf (visitTheAddress).visit(new Address(2,1)); inSequence(visitationOrder);
+		}}); 
+ 
 		new Grid(3,2).atEachAddress(visitTheAddress);
 	}
 }
