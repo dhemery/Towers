@@ -45,7 +45,7 @@ public class ButtonFactory {
 
 	private List<JButton> makeButtons(Grid grid) {
 		List<JButton> buttons = new ArrayList<JButton>();
-		for(Address address : grid.addresses()) {
+		for(Address address : grid.addressesInRowColumnOrder()) {
 			buttons.add(makeButton(address));
 		}
 		return buttons;

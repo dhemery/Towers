@@ -22,7 +22,7 @@ public class Grid {
 		return columns;
 	}
 
-	public List<Address> addresses() {
+	public List<Address> addressesInRowColumnOrder() {
 		return addresses;
 	}
 

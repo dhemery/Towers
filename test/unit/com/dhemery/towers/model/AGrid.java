@@ -28,6 +28,6 @@ public class AGrid {
 				new Address(2,0),
 				new Address(2,1));
 
-		assertThat(new Grid(3,2).addresses()).containsExactly(expectedAddresses.toArray());
+		assertThat(new Grid(3,2).addressesInRowColumnOrder()).containsExactly(expectedAddresses.toArray());
 	}
 }

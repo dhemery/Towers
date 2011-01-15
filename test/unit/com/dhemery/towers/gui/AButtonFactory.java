@@ -1,7 +1,6 @@
 package com.dhemery.towers.gui;
 import static org.fest.assertions.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -23,23 +22,13 @@ public class AButtonFactory {
 	@Test
 	public void makesAButtonForEachAddress() {
 		Grid grid = new Grid(3,2);
-		ButtonFactory factory = new ButtonFactory(grid);
-		assertThat(namesOf(factory.buttons())).isEqualTo(addressNames(grid));
-	}
+		List<Address> addresses = grid.addressesInRowColumnOrder();
 
-	private List<String> addressNames(Grid grid) {
-		List<String> names = new ArrayList<String>();
-		for(Address address : grid.addresses()) {
-			names.add(address.name());
+		List<JButton> buttons = new ButtonFactory(grid).buttons();
+		
+		assertThat(buttons.size()).isEqualTo(addresses.size());
+		for(int i = 0 ; i < addresses.size() ; i++) {
+			assertThat(buttons.get(i).getName()).isEqualTo(addresses.get(i).name());
 		}
-		return names;
-	}
-
-	private List<String> namesOf(List<JButton> buttons) {
-		List<String> names = new ArrayList<String>();
-		for(JButton button : buttons) {
-			names.add(button.getName());
-		}
-		return names;
 	}
 }
