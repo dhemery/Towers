@@ -1,17 +1,15 @@
 package com.dhemery.towers.application;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.dhemery.towers.model.Address;
+import com.dhemery.towers.model.Grid;
 
 public class Towers {
 	public static final String APPLICATION_FRAME_NAME = "Application Frame";
@@ -19,10 +17,10 @@ public class Towers {
 	protected static final int CITY_SIZE = 8;
 
 	private final JFrame frame;
+	private final JPanel cityPanel;
 
 	public static void main(String...args) {
 		SwingUtilities.invokeLater(new Runnable() {
-
 			@Override
 			public void run() {
 				new Towers().run();
@@ -32,37 +30,28 @@ public class Towers {
 
 	public Towers() {
 		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setName(APPLICATION_FRAME_NAME);
-		JPanel panel = new JPanel();
-		panel.setName(CITY_PANEL_NAME);
-		panel.setLayout(new GridLayout(CITY_SIZE,CITY_SIZE));
-		panel.setPreferredSize(new Dimension(400,400));
-		frame.add(panel, BorderLayout.CENTER);
-		for(int row = 0 ; row < CITY_SIZE ; row++) {
-			for(int column = 0 ; column < CITY_SIZE ; column++) {
-				JButton button = new JButton();
-				button.setName(new Address(row,column).name());
-				button.setSize(60,60);
-				button.setHorizontalAlignment(JButton.CENTER);
-				button.setOpaque(true);
-				if(isEven(row+column)) {
-					button.setForeground(Color.white);
-					button.setBackground(Color.black);
-				} else {
-					button.setForeground(Color.black);
-					button.setBackground(Color.white);					
-				}
-				button.setText("1");
-				button.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-				panel.add(button);
-			}
-		}
-		frame.pack();
+		cityPanel = new JPanel();
+		ButtonFactory buttonFactory = new ButtonFactory();
+		Grid grid = new Grid(CITY_SIZE, CITY_SIZE);
+		makeCityDisplay(cityPanel, grid, buttonFactory);
+		makeApplicationFrame(cityPanel);
 	}
 
-	private boolean isEven(int i) {
-		return i %2 == 0;
+	private void makeCityDisplay(JPanel panel, Grid grid, ButtonFactory factory) {
+		panel.setName(Towers.CITY_PANEL_NAME);
+		panel.setLayout(new GridLayout(grid.rows(), grid.columns()));
+		panel.setPreferredSize(new Dimension(400,400));
+
+		for(JButton button : factory.buttonsFor(grid)) {
+			panel.add(button);
+		}
+	}
+
+	private void makeApplicationFrame(JPanel panel) {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setName(APPLICATION_FRAME_NAME);
+		frame.add(panel, BorderLayout.CENTER);
+		frame.pack();
 	}
 
 	private void run() {
