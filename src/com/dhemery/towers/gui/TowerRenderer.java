@@ -1,7 +1,7 @@
 package com.dhemery.towers.gui;
 
 import java.awt.Color;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -38,7 +38,7 @@ public class TowerRenderer {
 	}
 
 	public TowerRenderer() {
-		stylesByColor = new HashMap<Tower.Color,Style>();
+		stylesByColor = new EnumMap<Tower.Color,Style>(Tower.Color.class);
 		stylesByColor.put(Tower.Color.BLACK, blackStyle);
 		stylesByColor.put(Tower.Color.WHITE, whiteStyle);
 		stylesByColor.put(Tower.Color.GRAY, grayStyle);
