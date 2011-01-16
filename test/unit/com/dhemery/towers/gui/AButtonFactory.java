@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -22,14 +23,18 @@ public class AButtonFactory {
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 	
 	@Mock public TowerRenderer renderer;
+	private List<Tower> towers;
 
-	@Test
-	public void makesAButtonForEachTower() {
-		final List<Tower> towers = Arrays.asList(
+	@Before
+	public void setUp() {
+		towers = Arrays.asList(
 				Tower.createBlack("black"),
 				Tower.createWhite("white"),
 				Tower.createGray("gray"));
+	}
 
+	@Test
+	public void makesAButtonForEachTower() {
 		context.checking(new Expectations() {{
 			allowing(renderer).render(with(any(JButton.class)), with(any(Tower.class)));
 		}});
@@ -43,11 +48,7 @@ public class AButtonFactory {
 	}
 
 	@Test
-	public void rendersEachWithTowerRenderer() {
-		final List<Tower> towers = Arrays.asList(
-				Tower.createBlack("black"),
-				Tower.createWhite("white"),
-				Tower.createGray("gray"));
+	public void rendersEachButtonWithTowerRenderer() {
 		context.checking(new Expectations() {{
 			oneOf (renderer).render(with(any(JButton.class)), with(same(towers.get(0))));
 			oneOf (renderer).render(with(any(JButton.class)), with(same(towers.get(1))));

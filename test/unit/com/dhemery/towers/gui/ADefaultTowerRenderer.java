@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.dhemery.towers.gui.fixtures.RunHeadless;
 import com.dhemery.towers.model.Tower;
 
-public class ADominantBackgroundTowerRenderer {
+public class ADefaultTowerRenderer {
 	private JButton button;
 	private TowerRenderer renderer;
 
@@ -22,7 +22,7 @@ public class ADominantBackgroundTowerRenderer {
 	@Before
 	public void setUp() {
 		button = new JButton();
-		renderer = new DominantBackgroundTowerRenderer();
+		renderer = new DefaultTowerRenderer();
 	}
 
 	@Test
