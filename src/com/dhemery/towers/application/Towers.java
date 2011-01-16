@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.dhemery.towers.gui.ButtonFactory;
-import com.dhemery.towers.model.Grid;
+import com.dhemery.towers.model.AlternatingColorTowerFactory;
+import com.dhemery.towers.model.RowColumnOrderGrid;
+import com.dhemery.towers.model.TowerFactory;
 
 public class Towers {
 	public static final String APPLICATION_FRAME_NAME = "Application Frame";
@@ -32,13 +34,14 @@ public class Towers {
 	public Towers() {
 		frame = new JFrame();
 		cityPanel = new JPanel();
-		Grid grid = new Grid(CITY_SIZE, CITY_SIZE);
-		ButtonFactory buttonFactory = new ButtonFactory(grid);
+		RowColumnOrderGrid grid = new RowColumnOrderGrid(CITY_SIZE, CITY_SIZE);
+		TowerFactory towerFactory = new AlternatingColorTowerFactory();
+		ButtonFactory buttonFactory = new ButtonFactory(grid, towerFactory);
 		makeCityDisplay(cityPanel, grid, buttonFactory);
 		makeApplicationFrame(cityPanel);
 	}
 
-	private void makeCityDisplay(JPanel panel, Grid grid, ButtonFactory factory) {
+	private void makeCityDisplay(JPanel panel, RowColumnOrderGrid grid, ButtonFactory factory) {
 		panel.setName(Towers.CITY_PANEL_NAME);
 		panel.setLayout(new GridLayout(grid.rows(), grid.columns()));
 		panel.setPreferredSize(new Dimension(400,400));
