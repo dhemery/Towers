@@ -10,11 +10,11 @@ import javax.swing.JButton;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import com.dhemery.towers.gui.ButtonFactory;
+import com.dhemery.towers.gui.fixtures.RunHeadless;
 import com.dhemery.towers.model.Address;
 import com.dhemery.towers.model.Tower;
 import com.dhemery.towers.model.Grid;
@@ -31,15 +31,12 @@ public class AButtonFactory {
 	private final Tower whiteTower = Tower.createWhite();
 	private final Tower grayTower = Tower.createGray();
 
+	@Rule public RunHeadless headless = new RunHeadless();
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
-
+	
 	@Mock public TowerFactory towerFactory;
 	@Mock public Grid grid;
 
-	@Before
-	public void setUp() {
-		System.setProperty("java.awt.headless", "true");
-	}
 
 	@Test
 	public void makesAButtonForEachAddress() {

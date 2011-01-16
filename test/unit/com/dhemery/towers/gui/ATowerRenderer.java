@@ -7,14 +7,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+
+import com.dhemery.towers.gui.fixtures.RunHeadless;
 
 public class ATowerRenderer {
 	private JButton button;
 
+	@Rule public RunHeadless headless = new RunHeadless();
+
 	@Before
 	public void setUp() {
-		System.setProperty("java.awt.headless", "true");
 		button = new JButton();
 	}
 
