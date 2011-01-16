@@ -14,6 +14,6 @@ public class ATower {
 	public void remembersItsColor() {
 		assertThat(Tower.createBlack().color()).isEqualTo(Tower.Color.BLACK);
 		assertThat(Tower.createWhite().color()).isEqualTo(Tower.Color.WHITE);
-		assertThat(Tower.NONE.color()).isEqualTo(Tower.Color.GRAY);
+		assertThat(Tower.createGray().color()).isEqualTo(Tower.Color.GRAY);
 	}
 }

@@ -1,7 +1,6 @@
 package com.dhemery.towers.model;
 
 public class Tower {
-	public static final Tower NONE = new Tower(Color.GRAY);
 	private final Color color;
 
 	public enum Color {
@@ -24,6 +23,10 @@ public class Tower {
 
 	public static Tower createWhite() {
 		return new Tower(Color.WHITE);
+	}
+
+	public static Tower createGray() {
+		return new Tower(Color.GRAY);
 	}
 
 	public Color color() {

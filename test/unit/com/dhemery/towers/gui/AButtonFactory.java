@@ -29,7 +29,7 @@ public class AButtonFactory {
 
 	private final Tower blackTower = Tower.createBlack();
 	private final Tower whiteTower = Tower.createWhite();
-	private final Tower grayTower = Tower.NONE;
+	private final Tower grayTower = Tower.createGray();
 
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 
