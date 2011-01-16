@@ -16,8 +16,8 @@ import org.junit.Test;
 
 import com.dhemery.towers.gui.ButtonFactory;
 import com.dhemery.towers.model.Address;
-import com.dhemery.towers.model.Grid;
 import com.dhemery.towers.model.Tower;
+import com.dhemery.towers.model.Grid;
 import com.dhemery.towers.model.TowerFactory;
 
 
@@ -29,7 +29,7 @@ public class AButtonFactory {
 
 	private final Tower blackTower = Tower.createBlack();
 	private final Tower whiteTower = Tower.createWhite();
-	private final Tower grayTower = Tower.createGray();
+	private final Tower grayTower = Tower.NONE;
 
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 

@@ -8,8 +8,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import com.dhemery.towers.model.Address;
-import com.dhemery.towers.model.Grid;
 import com.dhemery.towers.model.Tower;
+import com.dhemery.towers.model.Grid;
 import com.dhemery.towers.model.TowerFactory;
 
 public class ButtonFactory {

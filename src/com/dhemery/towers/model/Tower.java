@@ -1,6 +1,7 @@
 package com.dhemery.towers.model;
 
 public class Tower {
+	public static final Tower NONE = new Tower(Color.GRAY);
 	private final Color color;
 
 	public enum Color {
@@ -9,7 +10,7 @@ public class Tower {
 		GRAY
 	}
 
-	public Tower(Color color) {
+	private Tower(Color color) {
 		this.color = color;
 	}
 
@@ -25,15 +26,10 @@ public class Tower {
 		return new Tower(Color.WHITE);
 	}
 
-	public static Tower createGray() {
-		return new Tower(Color.GRAY);
-	}
-
 	public Color color() {
 		return color;
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -54,5 +50,4 @@ public class Tower {
 			return false;
 		return true;
 	}
-
 }
