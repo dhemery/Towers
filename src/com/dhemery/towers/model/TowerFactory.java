@@ -1,5 +1,7 @@
 package com.dhemery.towers.model;
 
+import java.util.List;
+
 public interface TowerFactory {
-	Tower tower(Address address);
+	List<Tower> towers();
 }

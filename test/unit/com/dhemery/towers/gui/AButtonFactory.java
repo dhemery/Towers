@@ -14,53 +14,46 @@ import org.junit.Test;
 
 import com.dhemery.towers.gui.ButtonFactory;
 import com.dhemery.towers.gui.fixtures.RunHeadless;
-import com.dhemery.towers.model.Address;
 import com.dhemery.towers.model.Tower;
-import com.dhemery.towers.model.Grid;
-import com.dhemery.towers.model.TowerFactory;
 
 
 public class AButtonFactory {
 	@Rule public RunHeadless headless = new RunHeadless();
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 	
-	@Mock public TowerFactory towerFactory;
-	@Mock public Grid grid;
 	@Mock public TowerRenderer renderer;
 
 	@Test
-	public void makesAButtonForEachAddress() {
-		final List<Address> addresses = Arrays.asList(
-				new Address(0,0),
-				new Address(999,12),
-				new Address(3,1233));
+	public void makesAButtonForEachTower() {
+		final List<Tower> towers = Arrays.asList(
+				Tower.createBlack("black"),
+				Tower.createWhite("white"),
+				Tower.createGray("gray"));
 
 		context.checking(new Expectations() {{
-			allowing (towerFactory).tower(with(any(Address.class)));
-			will (returnValue(Tower.createBlack()));
-			
 			allowing(renderer).render(with(any(JButton.class)), with(any(Tower.class)));
 		}});
 
-		List<JButton> buttons = new ButtonFactory(addresses, towerFactory, renderer).buttons();
+		List<JButton> buttons = new ButtonFactory(towers, renderer).buttons();
 
-		assertThat(buttons.size()).isEqualTo(addresses.size());
-		for(int i = 0 ; i < addresses.size() ; i++) {
-			assertThat(buttons.get(i).getName()).isEqualTo(addresses.get(i).name());
+		assertThat(buttons.size()).isEqualTo(towers.size());
+		for(int i = 0 ; i < towers.size() ; i++) {
+			assertThat(buttons.get(i).getName()).isEqualTo(towers.get(i).name());
 		}
 	}
 
 	@Test
-	public void rendersButtonsWithTowerRenderer() {
-		final Tower tower = Tower.createBlack();
-		List<Address> addresses = Arrays.asList(new Address(0,0));
+	public void rendersEachWithTowerRenderer() {
+		final List<Tower> towers = Arrays.asList(
+				Tower.createBlack("black"),
+				Tower.createWhite("white"),
+				Tower.createGray("gray"));
 		context.checking(new Expectations() {{
-			allowing (towerFactory).tower(with(any(Address.class)));
-			will(returnValue(tower));
-			
-			oneOf (renderer).render(with(any(JButton.class)), with(same(tower)));
+			oneOf (renderer).render(with(any(JButton.class)), with(same(towers.get(0))));
+			oneOf (renderer).render(with(any(JButton.class)), with(same(towers.get(1))));
+			oneOf (renderer).render(with(any(JButton.class)), with(same(towers.get(2))));
 		}});
 
-		new ButtonFactory(addresses, towerFactory, renderer).buttons();
+		new ButtonFactory(towers, renderer).buttons();
 	}
 }

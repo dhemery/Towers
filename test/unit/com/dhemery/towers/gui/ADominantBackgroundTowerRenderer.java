@@ -27,21 +27,21 @@ public class ADominantBackgroundTowerRenderer {
 
 	@Test
 	public void rendersABlackTowerAsWhiteOnBlack() {
-		renderer.render(button, Tower.createBlack());
+		renderer.render(button, Tower.createBlack("black"));
 		assertThat(button.getForeground()).isEqualTo(Color.white);
 		assertThat(button.getBackground()).isEqualTo(Color.black);
 	}
 
 	@Test
 	public void rendersAWhiteTowerAsBlackOnWhite() {
-		renderer.render(button, Tower.createWhite());
+		renderer.render(button, Tower.createWhite("white"));
 		assertThat(button.getForeground()).isEqualTo(Color.black);
 		assertThat(button.getBackground()).isEqualTo(Color.white);
 	}
 	
 	@Test
 	public void rendersAGrayTowerAsGrayOnGray() {
-		renderer.render(button, Tower.createGray());
+		renderer.render(button, Tower.createGray("gray"));
 		assertThat(button.getForeground()).isEqualTo(Color.gray);
 		assertThat(button.getBackground()).isEqualTo(Color.gray);
 	}

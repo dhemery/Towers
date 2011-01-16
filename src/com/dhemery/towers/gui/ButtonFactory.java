@@ -7,24 +7,22 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import com.dhemery.towers.model.Address;
 import com.dhemery.towers.model.Tower;
-import com.dhemery.towers.model.TowerFactory;
 
 public class ButtonFactory {
 	private final List<JButton> buttons;
 
-	public ButtonFactory(List<Address> addresses, TowerFactory towerFactory, TowerRenderer renderer) {
-		buttons = makeButtons(addresses, towerFactory, renderer);
+	public ButtonFactory(List<Tower> towers, TowerRenderer renderer) {
+		buttons = makeButtons(towers, renderer);
 	}
 
 	public List<JButton> buttons() {
 		return buttons;
 	}
 
-	private JButton button(Address address, Tower tower, TowerRenderer renderer) {
+	private JButton button(Tower tower, TowerRenderer renderer) {
 		JButton button = new JButton();
-		initialize(button, address);
+		initialize(button, tower.name());
 		setBorder(button);
 		renderer.render(button, tower);
 		setText(button);
@@ -35,8 +33,8 @@ public class ButtonFactory {
 		button.setText("1");
 	}
 
-	private void initialize(JButton button, Address address) {
-		button.setName(address.name());
+	private void initialize(JButton button, String name) {
+		button.setName(name);
 		button.setSize(60,60);
 		button.setHorizontalAlignment(JButton.CENTER);
 		button.setOpaque(true);
@@ -46,10 +44,10 @@ public class ButtonFactory {
 		button.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 	}
 
-	private List<JButton> makeButtons(List<Address> addresses, TowerFactory towerFactory, TowerRenderer renderer) {
+	private List<JButton> makeButtons(List<Tower> towers, TowerRenderer renderer) {
 		List<JButton> buttons = new ArrayList<JButton>();
-		for(Address address : addresses) {
-			buttons.add(button(address, towerFactory.tower(address), renderer));
+		for(Tower tower : towers) {
+			buttons.add(button(tower, renderer));
 		}
 		return buttons;
 	}

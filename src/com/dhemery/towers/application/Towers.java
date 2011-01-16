@@ -37,9 +37,9 @@ public class Towers {
 		frame = new JFrame();
 		cityPanel = new JPanel();
 		RowColumnOrderGrid grid = new RowColumnOrderGrid(CITY_SIZE, CITY_SIZE);
-		TowerFactory towerFactory = new AlternatingColorTowerFactory();
+		TowerFactory towerFactory = new AlternatingColorTowerFactory(grid.addresses());
 		TowerRenderer renderer = new DominantBackgroundTowerRenderer();
-		ButtonFactory buttonFactory = new ButtonFactory(grid.addresses(), towerFactory, renderer);
+		ButtonFactory buttonFactory = new ButtonFactory(towerFactory.towers(), renderer);
 		makeCityDisplay(cityPanel, grid, buttonFactory);
 		makeApplicationFrame(cityPanel);
 	}
