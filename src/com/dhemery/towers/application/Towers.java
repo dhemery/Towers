@@ -11,11 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.dhemery.towers.gui.ButtonFactory;
-import com.dhemery.towers.gui.DefaultTowerRenderer;
 import com.dhemery.towers.gui.TowerRenderer;
-import com.dhemery.towers.model.AlternatingColorTowerFactory;
 import com.dhemery.towers.model.Grid;
-import com.dhemery.towers.model.RowColumnOrderGrid;
+import com.dhemery.towers.model.Tower;
 import com.dhemery.towers.model.TowerFactory;
 
 public class Towers {
@@ -35,12 +33,24 @@ public class Towers {
 	}
 
 	public Towers() {
-		Grid grid = new RowColumnOrderGrid(CITY_SIZE, CITY_SIZE);
-		TowerRenderer renderer = new DefaultTowerRenderer();
-		TowerFactory towerFactory = new AlternatingColorTowerFactory(grid.addresses());
-		ButtonFactory buttonFactory = new ButtonFactory(towerFactory.towers(), renderer);
-		JPanel cityPanel = makeCityPanel(CITY_PANEL_NAME, grid, buttonFactory.buttons());
+		Grid grid = new Grid(CITY_SIZE, CITY_SIZE);
+		ButtonFactory buttonFactory = new ButtonFactory(grid.addresses());
+		TowerFactory towerFactory = new TowerFactory(grid.addresses());
+
+		List<JButton> buttons = buttonFactory.buttons();
+		List<Tower> towers = towerFactory.towers();
+		TowerRenderer renderer = new TowerRenderer();
+		
+		renderTowersIntoButtons(renderer, towers, buttons);
+
+		JPanel cityPanel = makeCityPanel(CITY_PANEL_NAME, grid, buttons);
 		frame = makeApplicationFrame(cityPanel, APPLICATION_FRAME_NAME);
+	}
+
+	private void renderTowersIntoButtons(TowerRenderer renderer, List<Tower> towers, List<JButton> buttons) {
+		for(int i = 0 ; i < towers.size() ; i++) {
+			renderer.render(buttons.get(i), towers.get(i));
+		}
 	}
 
 	private JPanel makeCityPanel(String name, Grid grid, List<JButton> buttons) {

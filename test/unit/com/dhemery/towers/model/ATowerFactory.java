@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class AnAlternatingColorTowerFactory {
+public class ATowerFactory {
 	@Test
 	public void makesBlackTowerIfAddressRowAndColumnSumToAnEvenNumber() {
 		List<Address> blackAddresses = Arrays.asList(
@@ -17,7 +17,7 @@ public class AnAlternatingColorTowerFactory {
 				new Address(1,1),
 				new Address(9999,3333)
 			);
-		TowerFactory factory = new AlternatingColorTowerFactory(blackAddresses);
+		TowerFactory factory = new TowerFactory(blackAddresses);
 		List<Tower> towers = factory.towers();
 
 		for(Tower tower : towers) {
@@ -34,7 +34,7 @@ public class AnAlternatingColorTowerFactory {
 				new Address(3,4),
 				new Address(9998,3333)
 			);
-		TowerFactory factory = new AlternatingColorTowerFactory(whiteAddresses);
+		TowerFactory factory = new TowerFactory(whiteAddresses);
 		List<Tower> towers = factory.towers();
 
 		for(Tower tower : towers) {
