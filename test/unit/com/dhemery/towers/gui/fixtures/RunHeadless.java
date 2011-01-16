@@ -8,12 +8,8 @@ public class RunHeadless implements TestRule {
 
 	@Override
 	public Statement apply(Statement base, Description description) {
-		return new Statement() {
-			@Override
-			public void evaluate() throws Throwable {
-				System.setProperty("java.awt.headless", "true");
-			}
-		};
+		System.setProperty("java.awt.headless", "true");
+		return base;
 	}
 
 }

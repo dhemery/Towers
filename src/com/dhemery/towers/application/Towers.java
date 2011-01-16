@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.dhemery.towers.gui.ButtonFactory;
+import com.dhemery.towers.gui.DominantBackgroundTowerRenderer;
+import com.dhemery.towers.gui.TowerRenderer;
 import com.dhemery.towers.model.AlternatingColorTowerFactory;
 import com.dhemery.towers.model.RowColumnOrderGrid;
 import com.dhemery.towers.model.TowerFactory;
@@ -36,7 +38,8 @@ public class Towers {
 		cityPanel = new JPanel();
 		RowColumnOrderGrid grid = new RowColumnOrderGrid(CITY_SIZE, CITY_SIZE);
 		TowerFactory towerFactory = new AlternatingColorTowerFactory();
-		ButtonFactory buttonFactory = new ButtonFactory(grid, towerFactory);
+		TowerRenderer renderer = new DominantBackgroundTowerRenderer();
+		ButtonFactory buttonFactory = new ButtonFactory(grid.addresses(), towerFactory, renderer);
 		makeCityDisplay(cityPanel, grid, buttonFactory);
 		makeApplicationFrame(cityPanel);
 	}

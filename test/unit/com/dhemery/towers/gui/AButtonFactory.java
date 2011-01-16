@@ -1,7 +1,6 @@
 package com.dhemery.towers.gui;
 import static org.fest.assertions.Assertions.*;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,33 +21,28 @@ import com.dhemery.towers.model.TowerFactory;
 
 
 public class AButtonFactory {
-	private final Address blackAddress = new Address(0,0);
-	private final Address whiteAddress = new Address(999,12);
-	private final Address grayAddress = new Address(3,1233);
-	private final List<Address> addresses = Arrays.asList(blackAddress, whiteAddress, grayAddress);
-
-	private final Tower blackTower = Tower.createBlack();
-	private final Tower whiteTower = Tower.createWhite();
-	private final Tower grayTower = Tower.createGray();
-
 	@Rule public RunHeadless headless = new RunHeadless();
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 	
 	@Mock public TowerFactory towerFactory;
 	@Mock public Grid grid;
-
+	@Mock public TowerRenderer renderer;
 
 	@Test
 	public void makesAButtonForEachAddress() {
-		context.checking(new Expectations() {{
-			allowing (grid).addresses();
-			will (returnValue(addresses));
+		final List<Address> addresses = Arrays.asList(
+				new Address(0,0),
+				new Address(999,12),
+				new Address(3,1233));
 
+		context.checking(new Expectations() {{
 			allowing (towerFactory).tower(with(any(Address.class)));
 			will (returnValue(Tower.createBlack()));
+			
+			allowing(renderer).render(with(any(JButton.class)), with(any(Tower.class)));
 		}});
 
-		List<JButton> buttons = new ButtonFactory(grid, towerFactory).buttons();
+		List<JButton> buttons = new ButtonFactory(addresses, towerFactory, renderer).buttons();
 
 		assertThat(buttons.size()).isEqualTo(addresses.size());
 		for(int i = 0 ; i < addresses.size() ; i++) {
@@ -57,38 +51,16 @@ public class AButtonFactory {
 	}
 
 	@Test
-	public void colorsButtonsByTowerColor() {
+	public void rendersButtonsWithTowerRenderer() {
+		final Tower tower = Tower.createBlack();
+		List<Address> addresses = Arrays.asList(new Address(0,0));
 		context.checking(new Expectations() {{
-			allowing (grid).addresses(); will (returnValue(addresses));
-
 			allowing (towerFactory).tower(with(any(Address.class)));
-			will(onConsecutiveCalls(
-					returnValue(blackTower),
-					returnValue(whiteTower),
-					returnValue(grayTower)));
+			will(returnValue(tower));
+			
+			oneOf (renderer).render(with(any(JButton.class)), with(same(tower)));
 		}});
 
-		List<JButton> buttons = new ButtonFactory(grid, towerFactory).buttons();
-
-		assertThatButtonColorsMatchTowerColor(buttons.get(0), blackTower);
-		assertThatButtonColorsMatchTowerColor(buttons.get(1), whiteTower);
-		assertThatButtonColorsMatchTowerColor(buttons.get(2), grayTower);
-	}
-
-	private void assertThatButtonColorsMatchTowerColor(JButton button, Tower tower) {
-		assertThat(button.getForeground()).isEqualTo(foregroundFor(tower));
-		assertThat(button.getBackground()).isEqualTo(backgroundFor(tower));
-	}
-
-	private Color backgroundFor(Tower tower) {
-		if(tower.equals(blackTower)) return Color.black;
-		if(tower.equals(whiteTower)) return Color.white;
-		return Color.gray;
-	}
-
-	private Color foregroundFor(Tower tower) {
-		if(tower.equals(blackTower)) return Color.white;
-		if(tower.equals(whiteTower)) return Color.black;
-		return Color.gray;
+		new ButtonFactory(addresses, towerFactory, renderer).buttons();
 	}
 }
