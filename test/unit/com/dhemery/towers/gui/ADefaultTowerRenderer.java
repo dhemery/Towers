@@ -2,8 +2,6 @@ package com.dhemery.towers.gui;
 
 import static org.fest.assertions.Assertions.*;
 
-import java.awt.Color;
-
 import javax.swing.JButton;
 
 import org.junit.Before;
@@ -26,23 +24,23 @@ public class ADefaultTowerRenderer {
 	}
 
 	@Test
-	public void rendersABlackTowerAsWhiteOnBlack() {
+	public void rendersABlackTower() {
 		renderer.render(button, Tower.createBlack("black"));
-		assertThat(button.getForeground()).isEqualTo(Color.white);
-		assertThat(button.getBackground()).isEqualTo(Color.black);
+		assertThat(button.getForeground()).isEqualTo(DefaultTowerRenderer.BLACK_FOREGROUND);
+		assertThat(button.getBackground()).isEqualTo(DefaultTowerRenderer.BLACK_BACKGROUND);
 	}
 
 	@Test
-	public void rendersAWhiteTowerAsBlackOnWhite() {
+	public void rendersAWhiteTower() {
 		renderer.render(button, Tower.createWhite("white"));
-		assertThat(button.getForeground()).isEqualTo(Color.black);
-		assertThat(button.getBackground()).isEqualTo(Color.white);
+		assertThat(button.getForeground()).isEqualTo(DefaultTowerRenderer.WHITE_FOREGROUND);
+		assertThat(button.getBackground()).isEqualTo(DefaultTowerRenderer.WHITE_BACKGROUND);
 	}
 	
 	@Test
-	public void rendersAGrayTowerAsGrayOnGray() {
+	public void rendersAGrayTower() {
 		renderer.render(button, Tower.createGray("gray"));
-		assertThat(button.getForeground()).isEqualTo(Color.gray);
-		assertThat(button.getBackground()).isEqualTo(Color.gray);
+		assertThat(button.getForeground()).isEqualTo(DefaultTowerRenderer.GRAY_FOREGROUND);
+		assertThat(button.getBackground()).isEqualTo(DefaultTowerRenderer.GRAY_BACKGROUND);
 	}
 }

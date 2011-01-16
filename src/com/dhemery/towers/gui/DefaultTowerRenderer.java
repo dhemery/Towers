@@ -9,10 +9,16 @@ import javax.swing.JButton;
 import com.dhemery.towers.model.Tower;
 
 public class DefaultTowerRenderer implements TowerRenderer {
-	private static final Style blackStyle = new Style(Color.white, Color.black);
-	private static final Style whiteStyle = new Style(Color.black, Color.white);
-	private static final Style grayStyle = new Style(Color.gray, Color.gray);
-	private Map<Tower.Color,Style> stylesByColor;
+	public static final Color GRAY_FOREGROUND = Color.gray;
+	public static final Color GRAY_BACKGROUND = Color.gray;
+	public static final Color BLACK_FOREGROUND = Color.white;
+	public static final Color BLACK_BACKGROUND = Color.black;
+	public static final Color WHITE_FOREGROUND = Color.black;
+	public static final Color WHITE_BACKGROUND = Color.white;
+	private static final Style blackStyle = new Style(BLACK_FOREGROUND, BLACK_BACKGROUND);
+	private static final Style whiteStyle = new Style(WHITE_FOREGROUND, WHITE_BACKGROUND);
+	private static final Style grayStyle = new Style(GRAY_FOREGROUND, GRAY_BACKGROUND);
+	private final Map<Tower.Color,Style> stylesByColor;
 
 	public static class Style {
 		private final Color foreground;
