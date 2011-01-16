@@ -25,23 +25,26 @@ public class ButtonFactory {
 
 	private JButton button(Address address, Tower tower) {
 		JButton button = new JButton();
+		initialize(button, address);
+		setBorder(button);
+		TowerRenderer.forTower(tower).renderColor(button);
+		setText(button);
+		return button;
+	}
+
+	private void setText(JButton button) {
+		button.setText("1");
+	}
+
+	private void initialize(JButton button, Address address) {
 		button.setName(address.name());
 		button.setSize(60,60);
 		button.setHorizontalAlignment(JButton.CENTER);
 		button.setOpaque(true);
-		if(tower.color().equals(Tower.Color.BLACK)) {
-			button.setForeground(Color.white);
-			button.setBackground(Color.black);
-		} if(tower.color().equals(Tower.Color.WHITE)) {
-			button.setForeground(Color.black);
-			button.setBackground(Color.white);					
-		} if(tower.color().equals(Tower.Color.GRAY)) {
-			button.setForeground(Color.gray);
-			button.setBackground(Color.gray);					
-		}
-		button.setText("1");
+	}
+
+	private void setBorder(JButton button) {
 		button.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		return button;
 	}
 
 	private List<JButton> makeButtons(Grid grid, TowerFactory towerFactory) {
