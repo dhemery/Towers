@@ -10,22 +10,10 @@ import javax.swing.JButton;
 import com.dhemery.towers.model.Tower;
 
 public class TowerRenderer {
-	public static final Color GRAY_FOREGROUND = Color.gray;
-	public static final Color GRAY_BACKGROUND = Color.gray;
-	public static final Color BLACK_FOREGROUND = Color.white;
-	public static final Color BLACK_BACKGROUND = Color.black;
-	public static final Color WHITE_FOREGROUND = Color.black;
-	public static final Color WHITE_BACKGROUND = Color.white;
-	private static final Style blackStyle = new Style(BLACK_FOREGROUND, BLACK_BACKGROUND);
-	private static final Style whiteStyle = new Style(WHITE_FOREGROUND, WHITE_BACKGROUND);
-	private static final Style grayStyle = new Style(GRAY_FOREGROUND, GRAY_BACKGROUND);
-
-	private final Map<Tower.Color,Style> stylesByColor;
-
 	public static class Style {
 		private final Color foreground;
 		private final Color background;
-
+		
 		private Style(Color foreground, Color background) {
 			this.foreground = foreground;
 			this.background = background;
@@ -36,8 +24,19 @@ public class TowerRenderer {
 			button.setBackground(background);
 		}
 	}
+	
+	public static final Color GRAY_FOREGROUND = Color.gray;
+	public static final Color GRAY_BACKGROUND = Color.gray;
+	public static final Color BLACK_FOREGROUND = Color.white;
+	public static final Color BLACK_BACKGROUND = Color.black;
+	public static final Color WHITE_FOREGROUND = Color.black;
+	public static final Color WHITE_BACKGROUND = Color.white;
+	private static final Style blackStyle = new Style(BLACK_FOREGROUND, BLACK_BACKGROUND);
+	private static final Style whiteStyle = new Style(WHITE_FOREGROUND, WHITE_BACKGROUND);
+	private static final Style grayStyle = new Style(GRAY_FOREGROUND, GRAY_BACKGROUND);
+	private static final Map<Tower.Color,Style> stylesByColor;
 
-	public TowerRenderer() {
+	static {
 		stylesByColor = new EnumMap<Tower.Color,Style>(Tower.Color.class);
 		stylesByColor.put(Tower.Color.BLACK, blackStyle);
 		stylesByColor.put(Tower.Color.WHITE, whiteStyle);
