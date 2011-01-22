@@ -1,6 +1,8 @@
 package com.dhemery.towers.model;
 
-import static org.fest.assertions.Assertions.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,7 @@ public class ATowerFactory {
 		List<Tower> towers = factory.towers();
 
 		for(Tower tower : towers) {
-			assertThat(tower.color()).isEqualTo(Tower.Color.BLACK);
+			assertThat(tower.color(), is(Tower.Color.BLACK));
 		}
 	}
 	
@@ -38,7 +40,7 @@ public class ATowerFactory {
 		List<Tower> towers = factory.towers();
 
 		for(Tower tower : towers) {
-			assertThat(tower.color()).isEqualTo(Tower.Color.WHITE);
+			assertThat(tower.color(), is(Tower.Color.WHITE));
 		}
 	}
 }

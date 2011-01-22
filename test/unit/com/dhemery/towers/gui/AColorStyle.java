@@ -1,6 +1,8 @@
 package com.dhemery.towers.gui;
 
-import static org.fest.assertions.Assertions.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 
 import java.awt.Color;
 
@@ -16,7 +18,7 @@ public class AColorStyle {
 		label.setBackground(Color.white);
 		
 		new ColorStyle(Color.red, Color.green).render(label);
-		assertThat(label.getForeground()).isEqualTo(Color.red);
-		assertThat(label.getBackground()).isEqualTo(Color.green);
+		assertThat(label.getForeground(), is(Color.red));
+		assertThat(label.getBackground(), is(Color.green));
 	}
 }

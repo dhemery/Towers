@@ -1,5 +1,7 @@
 package com.dhemery.towers.gui;
-import static org.fest.assertions.Assertions.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +32,9 @@ public class AButtonFactory {
 
 		List<JButton> buttons = new ButtonFactory(addresses).buttons();
 
-		assertThat(buttons.size()).isEqualTo(addresses.size());
+		assertThat(buttons, hasSize(addresses.size()));
 		for(int i = 0 ; i < addresses.size() ; i++) {
-			assertThat(buttons.get(i).getName()).isEqualTo(addresses.get(i).name());
+			assertThat(buttons.get(i).getName(), is(addresses.get(i).name()));
 		}
 	}
 }
